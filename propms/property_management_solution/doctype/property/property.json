@@ -26,6 +26,16 @@
   "bedroom",
   "master_bedroom",
   "common_bathroom",
+  "owner_and_contacts_section",
+  "property_manager",
+  "manager_name",
+  "manager_email",
+  "manager_phone",
+  "column_break_vzpa",
+  "owners",
+  "owner_name",
+  "owner_email",
+  "owner_phone",
   "section_break_13",
   "builtup_area",
   "carpet_area",
@@ -41,6 +51,9 @@
   "unit_assets",
   "column_break_24",
   "amenity_name",
+  "media_and_attachments_section",
+  "file_attachments",
+  "common_area_media",
   "property_meters_section",
   "property_meter_reading",
   "description_section",
@@ -59,7 +72,7 @@
   {
    "fieldname": "name1",
    "fieldtype": "Data",
-   "label": "Name",
+   "label": "Property Name",
    "reqd": 1,
    "unique": 1
   },
@@ -219,7 +232,8 @@
   },
   {
    "fieldname": "description_section",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Property Knowledgebase"
   },
   {
    "fieldname": "description",
@@ -277,16 +291,85 @@
    "fieldtype": "Link",
    "label": "Parent property",
    "options": "Property"
+  },
+  {
+   "bold": 1,
+   "collapsible": 1,
+   "fieldname": "owner_and_contacts_section",
+   "fieldtype": "Section Break",
+   "label": "OWNER AND CONTACTS"
+  },
+  {
+   "description": "needs to add link type",
+   "fieldname": "property_manager",
+   "fieldtype": "Data",
+   "label": "Property Manager"
+  },
+  {
+   "fieldname": "manager_name",
+   "fieldtype": "Data",
+   "label": "Manager Name"
+  },
+  {
+   "fieldname": "manager_email",
+   "fieldtype": "Data",
+   "label": "Manager Email"
+  },
+  {
+   "fieldname": "manager_phone",
+   "fieldtype": "Data",
+   "label": "Manager Phone"
+  },
+  {
+   "fieldname": "column_break_vzpa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "needs to add link type",
+   "fieldname": "owners",
+   "fieldtype": "Data",
+   "label": "Owner"
+  },
+  {
+   "fieldname": "owner_name",
+   "fieldtype": "Data",
+   "label": "Owner Name"
+  },
+  {
+   "fieldname": "owner_email",
+   "fieldtype": "Data",
+   "label": "Owner Email"
+  },
+  {
+   "fieldname": "owner_phone",
+   "fieldtype": "Data",
+   "label": "Owner Phone"
+  },
+  {
+   "fieldname": "media_and_attachments_section",
+   "fieldtype": "Section Break",
+   "label": "MEDIA AND ATTACHMENTS"
+  },
+  {
+   "fieldname": "file_attachments",
+   "fieldtype": "Attach",
+   "label": "File Attachments"
+  },
+  {
+   "fieldname": "common_area_media",
+   "fieldtype": "Attach Image",
+   "label": "Common Area Media"
   }
  ],
  "icon": "octicon octicon-home",
  "image_field": "photo",
  "is_tree": 1,
  "links": [],
- "modified": "2021-12-29 14:57:26.678556",
+ "modified": "2025-09-12 18:17:24.689701",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Property",
+ "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_property",
  "owner": "Administrator",
  "permissions": [
@@ -366,7 +449,9 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
