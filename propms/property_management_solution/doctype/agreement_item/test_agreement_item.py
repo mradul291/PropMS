@@ -5,5 +5,5 @@ from __future__ import unicode_literals
 import unittest
 
 
-class TestLeaseItem(unittest.TestCase):
+class TestAgreementItem(unittest.TestCase):
     pass

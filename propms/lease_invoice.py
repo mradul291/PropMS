@@ -40,14 +40,14 @@ def makeInvoice(
         doctype = "Sales Invoice"
     try:
         if not customer:
-            frappe.throw(_("Please select a Customer in Lease {0}").format(lease))
-        company = frappe.get_value("Lease", lease, "company")
+            frappe.throw(_("Please select a Customer in Agreement {0}").format(lease))
+        company = frappe.get_value("Agreement", lease, "company") 
         default_tax_template = frappe.get_value(
             "Company", company, "default_tax_template"
         )
         if qty != int(qty):
             # it means the last invoice for the lease that may have fraction of months
-            subs_end_date = frappe.get_value("Lease", lease, "end_date")
+            subs_end_date = frappe.get_value("Agreement", lease, "end_date") 
         else:
             # month qty is not fractional
             subs_end_date = add_days(add_months(schedule_start_date, qty), -1)
@@ -103,7 +103,7 @@ def getDueDate(date, customer):
 
 @frappe.whitelist()
 def getCostCenter(name):
-    property_name = frappe.db.get_value("Lease", name, "property")
+    property_name = frappe.db.get_value("Agreement", name, "property") 
     return frappe.db.get_value("Property", property_name, "cost_center")
 
 
@@ -116,7 +116,7 @@ def leaseInvoiceAutoCreate():
             "Property Management Settings", "invoice_start_date"
         )
         lease_invoice = frappe.get_all(
-            "Lease Invoice Schedule",
+            "Agreement Invoice Schedule",  
             filters={
                 "date_to_invoice": ["between", (invoice_start_date, today())],
                 "invoice_number": "",
@@ -136,7 +136,7 @@ def leaseInvoiceAutoCreate():
             ],
             order_by="parent, paid_by, invoice_item_group, date_to_invoice, currency, lease_item",
         )
-        # frappe.msgprint("Lease being generated for " + str(lease_invoice))
+        # frappe.msgprint("Agreement being generated for " + str(lease_invoice))
         row_num = 1  # to identify the 1st line of the list
         prev_parent = ""
         prev_customer = ""
@@ -182,7 +182,7 @@ def leaseInvoiceAutoCreate():
                         # frappe.msgprint("---")
                         # frappe.msgprint("The lease invoice schedule " + str(lease_invoice_schedule_name) + " would be updated with invoice number " + str(res.name) )
                         frappe.db.set_value(
-                            "Lease Invoice Schedule",
+                            "Agreement Invoice Schedule", 
                             lease_invoice_schedule_name,
                             "invoice_number"
                             if res.doctype == "Sales Invoice"
@@ -190,7 +190,7 @@ def leaseInvoiceAutoCreate():
                             res.name,
                         )
                     frappe.msgprint(
-                        "Lease Invoice generated with number: " + str(res.name)
+                        "Agreement Invoice generated with number: " + str(res.name)
                     )
                 item_dict = []
                 lease_invoice_schedule_list = (
@@ -198,10 +198,10 @@ def leaseInvoiceAutoCreate():
                 )  # reset the list of names of lease_invoice_schedule
                 item_json = {}
             # Now that the invoice would be created if required, load the record for preparing item_dict
-            invoice_item = frappe.get_doc("Lease Invoice Schedule", row.name)
+            invoice_item = frappe.get_doc("Agreement Invoice Schedule", row.name) 
             if not (invoice_item.schedule_start_date):
                 invoice_item.schedule_start_date = invoice_item.date_to_invoice
-            lease_end_date = frappe.get_value("Lease", invoice_item.parent, "end_date")
+            lease_end_date = frappe.get_value("Agreement", invoice_item.parent, "end_date") 
             item_json["item_code"] = invoice_item.lease_item
             item_json["qty"] = invoice_item.qty
             item_json["rate"] = invoice_item.rate
@@ -246,14 +246,14 @@ def leaseInvoiceAutoCreate():
             for lease_invoice_schedule_name in lease_invoice_schedule_list:
                 # frappe.msgprint("The lease invoice schedule " + str(lease_invoice_schedule_name) + " would be updated with invoice number " + str(res.name))
                 frappe.db.set_value(
-                    "Lease Invoice Schedule",
+                    "Agreement Invoice Schedule", 
                     lease_invoice_schedule_name,
                     "invoice_number"
                     if res.doctype == "Sales Invoice"
                     else "sales_order_number",
                     res.name,
                 )
-            frappe.msgprint("Lease Invoice generated with number: " + str(res.name))
+            frappe.msgprint("Agreement Invoice generated with number: " + str(res.name))
 
     except Exception as e:
         app_error_log(frappe.session.user, str(e))

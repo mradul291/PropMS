@@ -226,12 +226,12 @@ def validateSalesInvoiceItemDuplication(self, method):
 def statusChangeBeforeLeaseExpire():
     try:
         # Remarked as the users will set the property status manually
-        # lease_doclist=frappe.db.sql("SELECT l.name, l.property, l.end_date FROM  `tabLease` l  INNER JOIN `tabProperty` p ON l.property = p.name WHERE  l.name = (SELECT ml.name FROM   `tabLease` ml WHERE  ml.property = l.property  ORDER BY ml.end_date DESC LIMIT  1) AND p.status != 'On Lease' and Now() BETWEEN l.start_date and l.end_date", as_dict=1)
+        # lease_doclist=frappe.db.sql("SELECT l.name, l.property, l.end_date FROM  `tabAgreement` l  INNER JOIN `tabProperty` p ON l.property = p.name WHERE  l.name = (SELECT ml.name FROM   `tabAgreement` ml WHERE  ml.property = l.property  ORDER BY ml.end_date DESC LIMIT  1) AND p.status != 'On Lease' and Now() BETWEEN l.start_date and l.end_date", as_dict=1)
         # if lease_doclist:
         # 	for lease in lease_doclist:
         # 		frappe.db.set_value("Property",lease.property,"status","On Lease")
         lease_doclist = frappe.db.sql(
-            "SELECT l.name, l.property, l.end_date FROM  `tabLease` l  INNER JOIN `tabProperty` p ON l.property = p.name WHERE  l.name = (SELECT ml.name FROM   `tabLease` ml WHERE  ml.property = l.property ORDER BY ml.end_date DESC LIMIT  1) AND l.end_date BETWEEN Now() AND Date_add(Now(), INTERVAL 3 month) AND p.status = 'On Lease'",
+            "SELECT l.name, l.property, l.end_date FROM  `tabAgreement` l  INNER JOIN `tabProperty` p ON l.property = p.name WHERE  l.name = (SELECT ml.name FROM   `tabAgreement` ml WHERE  ml.property = l.property ORDER BY ml.end_date DESC LIMIT  1) AND l.end_date BETWEEN Now() AND Date_add(Now(), INTERVAL 3 month) AND p.status = 'On Lease'",
             as_dict=1,
         )
         if lease_doclist:
@@ -247,7 +247,7 @@ def statusChangeBeforeLeaseExpire():
 def statusChangeAfterLeaseExpire():
     try:
         lease_doclist = frappe.db.sql(
-            "SELECT l.name, l.property, l.end_date FROM  `tabLease` l  INNER JOIN `tabProperty` p ON l.property = p.name WHERE  l.name = (SELECT ml.name FROM   `tabLease` ml WHERE  ml.property = l.property  ORDER BY ml.end_date DESC LIMIT  1) AND p.status IN ('On Lease', 'Off Lease in 3 Months') and l.end_date < Now()",
+            "SELECT l.name, l.property, l.end_date FROM  `tabAgreement` l  INNER JOIN `tabProperty` p ON l.property = p.name WHERE  l.name = (SELECT ml.name FROM   `tabAgreement` ml WHERE  ml.property = l.property  ORDER BY ml.end_date DESC LIMIT  1) AND p.status IN ('On Lease', 'Off Lease in 3 Months') and l.end_date < Now()",
             as_dict=1,
         )
         if lease_doclist:
@@ -280,10 +280,10 @@ def makeDailyCheckListForTakeover(
             target.area = "Takeover"
 
         doclist = get_mapped_doc(
-            "Lease",
+            "Agreement",  
             source_name,
             {
-                "Lease": {
+                "Agreement": { 
                     "doctype": "Daily Checklist",
                     "field_map": {"property": "property"},
                 }
@@ -379,10 +379,10 @@ def makeInvoiceSchedule(
         frappe.get_doc(
             dict(
                 idx=idx,
-                doctype="Lease Invoice Schedule",
+                doctype="Agreement Invoice Schedule", 
                 parent=name,
                 parentfield="lease_invoice_schedule",
-                parenttype="lease",
+                parenttype="lease", # Instead_DoctypeIMP
                 date_to_invoice=date_to_invoice,
                 schedule_start_date=date,
                 lease_item=item,
@@ -528,7 +528,7 @@ def make_invoice_meter_reading(self, method):
             )
             # Changed from propert/meter customer lookup to pos cusotmer lookup as per conversation with Vimal on 2019-11-08
             leasename = get_latest_active_lease(meter_row.property)
-            lease = frappe.get_doc("Lease", leasename)
+            lease = frappe.get_doc("Agreement", leasename) 
             # customer = get_active_meter_customer_from_property(meter_row.property,self.meter_type)
             customer = lease.customer
             if customer:
@@ -608,7 +608,7 @@ def get_item_details(item, qty, service_start_date, service_end_date):
 @frappe.whitelist()
 def get_latest_active_lease(property_id):
     lease_details = frappe.get_all(
-        "Lease",
+        "Agreement",
         filters={"property": property_id},
         fields=["name"],
         order_by="lease_date desc",

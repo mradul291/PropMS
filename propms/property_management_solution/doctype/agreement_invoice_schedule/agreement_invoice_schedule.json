@@ -27,13 +27,13 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date to invoice",
-   "options": "Lease"
+   "options": "Agreement"
   },
   {
    "columns": 3,
    "fieldname": "lease_item",
    "fieldtype": "Link",
-   "label": "Lease Item",
+   "label": "Agreement Item",
    "options": "Item"
   },
   {
@@ -50,7 +50,7 @@
    "fieldname": "lease_item_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Lease Item Name",
+   "label": "Agreement Item Name",
    "read_only": 1
   },
   {
@@ -118,13 +118,15 @@
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-05-28 15:13:40.233162",
+ "modified": "2025-09-11 12:53:41.558413",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
- "name": "Lease Invoice Schedule",
+ "name": "Agreement Invoice Schedule",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

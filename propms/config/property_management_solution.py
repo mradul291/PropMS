@@ -14,8 +14,8 @@ def get_data():
                 },
                 {
                     "type": "doctype",
-                    "name": "Lease",
-                    "description": _("Lease pertaining to the properties."),
+                    "name": "Agreement", 
+                    "description": _("Agreement pertaining to the properties."), 
                 },
                 {
                     "type": "doctype",
@@ -178,10 +178,10 @@ def get_data():
                 },
                 {
                     "type": "report",
-                    "name": "Lease Information",
+                    "name": "Lease Information", # Instead_Doctype not sure change from report list
                     "is_query_report": True,
-                    "doctype": "Lease",
-                    "label": _("Lease Report"),
+                    "doctype": "Agreement",         
+                    "label": _("Agreement Report"),
                     "description": _(
                         "This is to show status of every lease by type of property"
                     ),

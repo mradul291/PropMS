@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "allow_import": 1,
  "autoname": "format:{property}-{#####}",
  "creation": "2018-05-01 22:11:38.457329",
@@ -57,7 +58,7 @@
   {
    "fieldname": "lease_basic_info_section",
    "fieldtype": "Section Break",
-   "label": "Lease Basic info"
+   "label": "Agreement Basic info"
   },
   {
    "fetch_from": "property.company",
@@ -83,7 +84,7 @@
    "fieldname": "lease_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Lease Date",
+   "label": "Agreement Date",
    "reqd": 1
   },
   {
@@ -110,7 +111,7 @@
   {
    "fieldname": "lease_parties_section",
    "fieldtype": "Section Break",
-   "label": "Lease Parties"
+   "label": "Agreement Parties"
   },
   {
    "fieldname": "property_owner",
@@ -124,7 +125,7 @@
    "fieldname": "lease_customer",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Lease Customer",
+   "label": "Agreement Customer",
    "options": "Customer",
    "reqd": 1
   },
@@ -149,7 +150,7 @@
   {
    "fieldname": "lease_dates_section",
    "fieldtype": "Section Break",
-   "label": "Lease Dates"
+   "label": "Agreement Dates"
   },
   {
    "fieldname": "start_date",
@@ -179,13 +180,13 @@
   {
    "fieldname": "lease_item_table_section",
    "fieldtype": "Section Break",
-   "label": "Lease Item Table"
+   "label": "Agreement Item Table"
   },
   {
    "fieldname": "lease_item",
    "fieldtype": "Table",
-   "label": "Lease Item",
-   "options": "Lease Item",
+   "label": "Agreement Item",
+   "options": "Agreement Item",
    "reqd": 1
   },
   {
@@ -196,8 +197,8 @@
   {
    "fieldname": "lease_invoice_schedule",
    "fieldtype": "Table",
-   "label": "Lease Invoice Schedule",
-   "options": "Lease Invoice Schedule"
+   "label": "Agreement Invoice Schedule",
+   "options": "Agreement Invoice Schedule"
   },
   {
    "fieldname": "section_break_13",
@@ -266,7 +267,7 @@
   {
    "fieldname": "other_lease_details_section",
    "fieldtype": "Section Break",
-   "label": "Other lease details"
+   "label": "Other Agreement details"
   },
   {
    "fieldname": "late_payment_interest_percentage",
@@ -304,7 +305,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Lease",
+   "options": "Agreement",
    "print_hide": 1,
    "read_only": 1
   },
@@ -316,14 +317,16 @@
   {
    "fieldname": "lease_status",
    "fieldtype": "Select",
-   "label": "Lease Status",
+   "label": "Agreement Status",
    "options": "\nActive\nClosed\nNot Materialized\nRenewal to Previous Lease\nAdendum to Previous Lease\nVacating"
   }
  ],
- "modified": "2021-06-09 17:20:19.067591",
+ "links": [],
+ "modified": "2025-09-11 12:54:24.918313",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
- "name": "Lease",
+ "name": "Agreement",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -351,7 +354,9 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

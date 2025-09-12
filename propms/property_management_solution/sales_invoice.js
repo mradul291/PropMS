@@ -1,7 +1,7 @@
 frappe.ui.form.on('Sales Invoice', {
-    property_name: function(frm, cdt, cdn) {
+    property_name: function (frm, cdt, cdn) {
         frappe.model.set_value(cdt, cdn, "customer", "");
-	if (frm.doc.cost_center) {
+        if (frm.doc.cost_center) {
             frappe.call({
                 method: "frappe.client.get_value",
                 args: {
@@ -11,19 +11,19 @@ frappe.ui.form.on('Sales Invoice', {
                         name: frm.doc.cost_center
                     },
                 },
-                callback: function(r, rt) {
+                callback: function (r, rt) {
                     if (r.message) {
-                        if (r.message.status == "On Lease") {
+                        if (r.message.status == "On Lease") { // # Instead_Doctype
                             frappe.call({
                                 method: "frappe.client.get_value",
                                 args: {
-                                    doctype: "Lease",
+                                    doctype: "Agreement",
                                     fieldname: "customer",
                                     filters: {
                                         property: frm.doc.cost_center
                                     },
                                 },
-                                callback: function(r, rt) {
+                                callback: function (r, rt) {
                                     if (r.message) {
                                         frappe.model.set_value(cdt, cdn, "customer", r.message.customer);
                                     }

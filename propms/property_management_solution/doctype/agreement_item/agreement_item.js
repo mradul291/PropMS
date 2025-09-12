@@ -1,8 +1,8 @@
 // Copyright (c) 2018, Aakvatech and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Lease Item', {
-	refresh: function(frm) {
+frappe.ui.form.on('Agreement Item', {
+	refresh: function (frm) {
 
 	}
 });

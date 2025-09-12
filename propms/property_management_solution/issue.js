@@ -161,12 +161,13 @@ frappe.ui.form.on('Issue', {
                 },
                 async: false,
                 callback: function (r, rt) {
+
                     if (r.message) {
                         if (r.message.status.toLowerCase() == 'on lease' || r.message.status.toLowerCase() == 'off lease in 3 months') {
                             frappe.call({
                                 method: 'frappe.client.get_value',
                                 args: {
-                                    doctype: 'Lease',
+                                    doctype: 'Agreement',
                                     fieldname: ['name', 'customer'],
                                     filters: {
                                         property: frm.doc.property_name,

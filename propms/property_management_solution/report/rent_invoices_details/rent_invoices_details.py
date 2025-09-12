@@ -77,7 +77,7 @@ def get_data(filters):
     for invoice in sales_invoices:
         _items_rwos = []
         append = False
-        property_name = frappe.db.get_value("Lease", invoice["lease"], "property")
+        property_name = frappe.db.get_value("Agreement", invoice["lease"], "property") 
         invoice["property_name"] = property_name
         if invoice.total == invoice.foreign_total:
             invoice.foreign_total, invoice.exchange_rate = "", ""
@@ -181,10 +181,10 @@ def get_columns(filters):
             "width": 100,
         },
         {
-            "label": "Lease",
+            "label": "Agreement", # Instead_Doctype
             "fieldname": "lease",
             "fieldtype": "Link",
-            "options": "Lease",
+            "options": "Agreement",
             "width": 100,
         },
         {

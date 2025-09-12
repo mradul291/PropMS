@@ -2,15 +2,15 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["Lease Information"] = {
-        "filters": [
-			{
-				"fieldname":"property_type",
-				"label": __("Property Type"),
-				"fieldtype": "Link",
-				"options": "Unit Type",
-				"default": " ",
-				"reqd": 1
-			},
-        ]
+frappe.query_reports["Lease Information"] = { // # Instead_Doctype
+	"filters": [
+		{
+			"fieldname": "property_type",
+			"label": __("Property Type"),
+			"fieldtype": "Link",
+			"options": "Unit Type",
+			"default": " ",
+			"reqd": 1
+		},
+	]
 }

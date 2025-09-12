@@ -71,7 +71,7 @@ def get_sales_invoice(filters, data, from_other=None, months=None):
     sales_invoices = frappe.db.sql(query, as_dict=True)
     previuos_customer = ""
     for i in sales_invoices:
-        lease = frappe.get_value("Lease", i.lease, "property")
+        lease = frappe.get_value("Agreement", i.lease, "property")
         obj = {
             "apartment_no": lease or "",
             "client": i.customer,
