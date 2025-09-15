@@ -1,0 +1,203 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-15 15:17:14.163117",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "room_details_section",
+  "room_code",
+  "property_code",
+  "room_status",
+  "column_break_wjfo",
+  "room_photo",
+  "room_vedio",
+  "room_furniture_section",
+  "chair",
+  "desk",
+  "column_break_uqvm",
+  "bedside_table",
+  "double_bed",
+  "column_break_ydsd",
+  "wardrobe",
+  "room_featuresequipment_section",
+  "room_size",
+  "ensuite",
+  "air_conditioner",
+  "private_entrance",
+  "column_break_yiir",
+  "balcony",
+  "backyard_access",
+  "room_attachments_section",
+  "room_file",
+  "room_picture",
+  "room_picture_show"
+ ],
+ "fields": [
+  {
+   "fieldname": "room_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Room Status",
+   "options": "Available\nArchived\nDeleted"
+  },
+  {
+   "fieldname": "property_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Property Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "room_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Room Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_wjfo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "room_photo",
+   "fieldtype": "Attach Image",
+   "label": "Room Photo"
+  },
+  {
+   "fieldname": "room_vedio",
+   "fieldtype": "Attach Image",
+   "label": "Room Vedio"
+  },
+  {
+   "fieldname": "room_details_section",
+   "fieldtype": "Section Break",
+   "label": "Room Details"
+  },
+  {
+   "fieldname": "room_featuresequipment_section",
+   "fieldtype": "Section Break",
+   "label": " Room Features/Equipment"
+  },
+  {
+   "default": "0",
+   "fieldname": "ensuite",
+   "fieldtype": "Check",
+   "label": "Ensuite"
+  },
+  {
+   "default": "0",
+   "fieldname": "air_conditioner",
+   "fieldtype": "Check",
+   "label": "Air Conditioner"
+  },
+  {
+   "fieldname": "column_break_yiir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "balcony",
+   "fieldtype": "Check",
+   "label": "Balcony"
+  },
+  {
+   "default": "0",
+   "fieldname": "backyard_access",
+   "fieldtype": "Check",
+   "label": "Backyard Access"
+  },
+  {
+   "default": "0",
+   "fieldname": "private_entrance",
+   "fieldtype": "Check",
+   "label": "Private Entrance"
+  },
+  {
+   "fieldname": "room_size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": " Room Size"
+  },
+  {
+   "fieldname": "room_attachments_section",
+   "fieldtype": "Section Break",
+   "label": "Room Attachments"
+  },
+  {
+   "fieldname": "room_file",
+   "fieldtype": "Attach",
+   "label": "Room File"
+  },
+  {
+   "fieldname": "room_picture",
+   "fieldtype": "Attach Image",
+   "label": "Room Picture"
+  },
+  {
+   "depends_on": "eval:doc.room_picture",
+   "fieldname": "room_picture_show",
+   "fieldtype": "Image",
+   "label": "Room Picture",
+   "options": "room_picture"
+  },
+  {
+   "fieldname": "room_furniture_section",
+   "fieldtype": "Section Break",
+   "label": "Room Furniture"
+  },
+  {
+   "default": "0",
+   "fieldname": "chair",
+   "fieldtype": "Check",
+   "label": "Chair"
+  },
+  {
+   "fieldname": "column_break_uqvm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "bedside_table",
+   "fieldtype": "Check",
+   "label": "Bedside Table"
+  },
+  {
+   "fieldname": "column_break_ydsd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "wardrobe",
+   "fieldtype": "Check",
+   "label": "Wardrobe"
+  },
+  {
+   "default": "0",
+   "fieldname": "desk",
+   "fieldtype": "Check",
+   "label": "Desk"
+  },
+  {
+   "default": "0",
+   "fieldname": "double_bed",
+   "fieldtype": "Check",
+   "label": "Double bed"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-15 18:17:55.535515",
+ "modified_by": "Administrator",
+ "module": "Property Management Solution",
+ "name": "Room",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
