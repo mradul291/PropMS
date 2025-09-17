@@ -4,13 +4,13 @@ cur_frm.add_fetch('property', 'unit_owner', 'property_owner');
 
 frappe.ui.form.on('Agreement', {
 	setup: function (frm) {
-		frm.set_query("lease_item", "lease_item", function () {
-			return {
-				"filters": [
-					["item_group", "=", "Agreement Items"],
-				]
-			};
-		});
+		// frm.set_query("lease_item", "lease_item", function () {
+		// 	return {
+		// 		"filters": [
+		// 			["item_group", "=", "Agreement Items"],
+		// 		]
+		// 	};
+		// });
 		frm.set_query("property", function () {
 			return {
 				"filters": {

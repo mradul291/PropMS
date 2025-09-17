@@ -12,7 +12,21 @@ class Property(NestedSet):
 
     def on_trash(self, allow_root_deletion=True):
         super().on_trash(allow_root_deletion)
+        
+    def validate(self):
+        self.update_room_counts()
 
+    def update_room_counts(self):
+        total = 0
+        occupied = 0
+
+        for row in self.room_details or []:
+            total += 1
+            if not row.is_available:
+                occupied += 1
+
+        self.total_rooms = total
+        self.occupied_rooms = occupied
 
 @frappe.whitelist()
 def add_node():

@@ -1,52 +1,49 @@
 // Copyright (c) 2018, Aakvatech and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Property', {
-	refresh: function(frm) {
-
+frappe.ui.form.on("Property", {
+	refresh: function (frm) {
+		frm.trigger("update_room_counts");
 	},
-	setup: function(frm) {
-		frm.set_query("cost_center", function() {
-			return {
-				"filters": {
-                    "company": frm.doc.company,
-				},
-			};
+
+	update_room_counts: function (frm) {
+		let total = 0;
+		let occupied = 0;
+
+		(frm.doc.room_details || []).forEach(row => {
+			total++;
+			if (!row.is_available) {
+				occupied++;
+			}
 		});
 
-		frm.set_query("parent_property", {is_group: 1});
-	},
-	company: function(frm) {
-		frm.set_value("cost_center", "");
-	},
+		frm.set_value("total_rooms", total);
+		frm.set_value("occupied_rooms", occupied);
+	}
 });
 
-frappe.ui.form.on('Property Meter Reading', {
-    meter_number: function(frm,cdt,cdn) {
-		var property_doc = locals[cur_frm.doc.doctype][cur_frm.doc.name];
-		var meter_doc = locals[cdt][cdn];
-		if (meter_doc.meter_number != "") {
-			$.each(property_doc.property_meter_reading, function(i, d) {
-				if(d.name!=meter_doc.name && meter_doc.meter_type==d.meter_type && d.status=="Active")	{
-					var msg="Another Active Meter of type "+meter_doc.meter_type+" Is Already allocated. Please de-activate it before adding a new meter of same type."
-					frappe.model.set_value(cdt,cdn,"meter_number",'')
-					frappe.throw(msg)
-				}
-			})
-		}
+// Trigger whenever room_details changes
+frappe.ui.form.on("Room Items", {
+	is_available: function (frm, cdt, cdn) {
+		frm.trigger("update_room_counts");
 	},
-	status: function(frm,cdt,cdn) {
-		var property_doc = locals[cur_frm.doc.doctype][cur_frm.doc.name];
-		var meter_doc = locals[cdt][cdn];
-		if (meter_doc.meter_number != "") {
-			$.each(property_doc.property_meter_reading, function(i, d) {
-				if(d.name!=meter_doc.name && meter_doc.meter_type==d.meter_type && d.status=="Active")	{
-					var msg="Another Active Meter of type "+meter_doc.meter_type+" Is Already allocated. Please de-activate it before adding a new meter of same type."
-					frappe.model.set_value(cdt,cdn,"status",'')
-					frappe.throw(msg)
-				}
-			})
+	room_name: function (frm, cdt, cdn) { // or any other field you want
+		frm.trigger("update_room_counts");
+	},
+	room_items_add: function (frm, cdt, cdn) {
+		frm.trigger("update_room_counts");
+	},
+	room_items_remove: function (frm, cdt, cdn) {
+		frm.trigger("update_room_counts");
+	},
+	room_details_add: function (frm, cdt, cdn) {
+		let row = frappe.get_doc(cdt, cdn);
+		if (frm.doc.property_code) {
+			row.property_code = frm.doc.property_code;
+			frm.refresh_field("room_details");
 		}
 	}
-})
+});
+
+
 

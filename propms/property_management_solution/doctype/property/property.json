@@ -2,7 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:name1",
+ "autoname": "field:property_code",
  "color": "#ff0102",
  "creation": "2018-11-22 23:15:45.736517",
  "doctype": "DocType",
@@ -11,12 +11,12 @@
  "engine": "InnoDB",
  "field_order": [
   "identification_section",
+  "property_code",
   "name1",
   "parent_property",
-  "is_group",
   "column_break_2",
   "company",
-  "cost_center",
+  "address",
   "owner_and_contacts_section",
   "property_manager",
   "manager_name",
@@ -29,62 +29,31 @@
   "owner_phone",
   "room_section",
   "room_details",
-  "section_break_4",
-  "unit_owner",
-  "title_deed_number",
-  "type",
-  "column_break_9",
-  "bedroom",
-  "master_bedroom",
-  "common_bathroom",
+  "total_rooms",
+  "occupied_rooms",
   "section_break_13",
-  "builtup_area",
-  "carpet_area",
-  "facing",
-  "no_of_parking",
+  "property_builtup_area",
+  "property_carpet_area",
+  "property_facing",
   "column_break_18",
-  "rent",
-  "security_deposit",
+  "no_of_parking",
   "smoking",
   "furnished",
   "status",
   "common_features_section",
-  "shared_living_area",
-  "carport",
-  "column_break_ypjn",
-  "shared_kitchen",
-  "backyard_access",
-  "column_break_gdkd",
-  "swimming_pool",
-  "laundry",
-  "column_break_attz",
-  "ac_in_common_area",
+  "common_features",
+  "property_media_section",
+  "property_images",
+  "common_area_images",
+  "file_and_videos",
   "section_break_22",
   "unit_assets",
   "column_break_24",
   "amenity_name",
-  "media_and_attachments_section",
-  "file_attachments",
-  "photo",
-  "common_area_media_section",
-  "common_area_img_1",
-  "common_area_img_4",
-  "common_area_image_show_1",
-  "common_area_image_show_4",
-  "column_break_wnbi",
-  "common_area_img_2",
-  "common_area_img_5",
-  "common_area_image_show_2",
-  "common_area_image_show_5",
-  "column_break_jpdi",
-  "common_area_img_3",
-  "common_area_img_6",
-  "common_area_image_show_3",
-  "common_area_image_show_6",
-  "property_meters_section",
-  "property_meter_reading",
+  "tradies_list_section",
+  "tradies",
   "description_section",
-  "description",
+  "knowledgebase",
   "lft",
   "rgt",
   "old_parent"
@@ -114,75 +83,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "photo",
-   "fieldtype": "Attach Image",
-   "hidden": 1,
-   "label": "Photo"
-  },
-  {
-   "bold": 1,
-   "fieldname": "section_break_4",
-   "fieldtype": "Section Break",
-   "label": "UNIT CHARACTERISTICS"
-  },
-  {
-   "fieldname": "unit_owner",
-   "fieldtype": "Link",
-   "label": "Unit Owner",
-   "options": "Customer"
-  },
-  {
-   "fieldname": "title_deed_number",
-   "fieldtype": "Data",
-   "label": "Title deed number"
-  },
-  {
-   "fieldname": "type",
-   "fieldtype": "Link",
-   "label": "Type",
-   "options": "Unit Type"
-  },
-  {
-   "fieldname": "column_break_9",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "bedroom",
-   "fieldtype": "Int",
-   "label": "Bedroom"
-  },
-  {
-   "fieldname": "master_bedroom",
-   "fieldtype": "Int",
-   "label": "Master bedroom"
-  },
-  {
-   "fieldname": "common_bathroom",
-   "fieldtype": "Int",
-   "label": "Common bathroom"
-  },
-  {
    "bold": 1,
    "collapsible": 1,
    "fieldname": "section_break_13",
    "fieldtype": "Section Break",
-   "label": "UNIT DETAILS"
-  },
-  {
-   "fieldname": "builtup_area",
-   "fieldtype": "Float",
-   "label": "Builtup area"
-  },
-  {
-   "fieldname": "carpet_area",
-   "fieldtype": "Float",
-   "label": "Carpet area"
-  },
-  {
-   "fieldname": "facing",
-   "fieldtype": "Select",
-   "label": "Facing",
-   "options": "North\nNorth-East\nEast\nSouth-East\nWest\nNorth-West\nSouth-West\nSouth"
+   "label": "PROPERTY DETAILS"
   },
   {
    "fieldname": "no_of_parking",
@@ -192,18 +97,6 @@
   {
    "fieldname": "column_break_18",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "rent",
-   "fieldtype": "Currency",
-   "label": "Rent",
-   "permlevel": 2
-  },
-  {
-   "fieldname": "security_deposit",
-   "fieldtype": "Currency",
-   "label": "Security Deposit",
-   "permlevel": 2
   },
   {
    "default": "0",
@@ -220,6 +113,7 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Status",
    "options": "Available\nBooked\nCommon Area (Not for lease)\nManaged for Customer\nOff Lease in 3 Months\nOn Lease\nOn Sale\nRemoved\nRenewal\nSold\nVacating\nOn lease"
   },
@@ -247,33 +141,10 @@
    "options": "Property Amenity"
   },
   {
-   "fieldname": "property_meters_section",
-   "fieldtype": "Section Break",
-   "label": "Property Meters"
-  },
-  {
-   "fieldname": "property_meter_reading",
-   "fieldtype": "Table",
-   "label": "Property Meter Reading",
-   "options": "Property Meter Reading"
-  },
-  {
    "fieldname": "description_section",
    "fieldtype": "Section Break",
-   "label": "Property Knowledgebase"
-  },
-  {
-   "fieldname": "description",
-   "fieldtype": "Text",
-   "label": "DESCRIPTION"
-  },
-  {
-   "fieldname": "cost_center",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Cost Center",
-   "options": "Cost Center",
-   "reqd": 1
+   "hide_border": 1,
+   "label": "KNOWLEDGEBASE"
   },
   {
    "fieldname": "company",
@@ -300,18 +171,11 @@
    "read_only": 1
   },
   {
-   "default": "0",
-   "fieldname": "is_group",
-   "fieldtype": "Check",
-   "label": "Is Group"
-  },
-  {
    "fieldname": "old_parent",
    "fieldtype": "Link",
    "hidden": 1,
    "label": "Old Parent",
-   "options": "Property",
-   "read_only": 1
+   "options": "Property"
   },
   {
    "fieldname": "parent_property",
@@ -330,22 +194,29 @@
    "fieldname": "property_manager",
    "fieldtype": "Link",
    "label": "Property Manager",
-   "options": "Manager"
+   "options": "Manager",
+   "reqd": 1
   },
   {
+   "fetch_from": "property_manager.first_name",
    "fieldname": "manager_name",
    "fieldtype": "Data",
-   "label": "Manager Name"
+   "label": "Manager Name",
+   "read_only": 1
   },
   {
+   "fetch_from": "property_manager.email",
    "fieldname": "manager_email",
    "fieldtype": "Data",
-   "label": "Manager Email"
+   "label": "Manager Email",
+   "read_only": 1
   },
   {
+   "fetch_from": "property_manager.phone",
    "fieldname": "manager_phone",
    "fieldtype": "Data",
-   "label": "Manager Phone"
+   "label": "Manager Phone",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_vzpa",
@@ -354,33 +225,30 @@
   {
    "fieldname": "owners",
    "fieldtype": "Link",
-   "label": "Owner",
-   "options": "Owner"
+   "label": "Property Owner",
+   "options": "Owner",
+   "reqd": 1
   },
   {
+   "fetch_from": "owners.first_name",
    "fieldname": "owner_name",
    "fieldtype": "Data",
-   "label": "Owner Name"
+   "label": "Owner Name",
+   "read_only": 1
   },
   {
+   "fetch_from": "owners.email",
    "fieldname": "owner_email",
    "fieldtype": "Data",
-   "label": "Owner Email"
+   "label": "Owner Email",
+   "read_only": 1
   },
   {
+   "fetch_from": "owners.phone",
    "fieldname": "owner_phone",
    "fieldtype": "Data",
-   "label": "Owner Phone"
-  },
-  {
-   "fieldname": "media_and_attachments_section",
-   "fieldtype": "Section Break",
-   "label": "MEDIA AND ATTACHMENTS"
-  },
-  {
-   "fieldname": "file_attachments",
-   "fieldtype": "Attach",
-   "label": "File Attachments"
+   "label": "Owner Phone",
+   "read_only": 1
   },
   {
    "fieldname": "common_features_section",
@@ -388,156 +256,107 @@
    "label": "COMMON FEATURES"
   },
   {
-   "default": "0",
-   "fieldname": "shared_living_area",
-   "fieldtype": "Check",
-   "label": "Shared Living Area"
-  },
-  {
-   "default": "0",
-   "fieldname": "carport",
-   "fieldtype": "Check",
-   "label": "Carport"
-  },
-  {
-   "fieldname": "column_break_ypjn",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "shared_kitchen",
-   "fieldtype": "Check",
-   "label": "Shared Kitchen"
-  },
-  {
-   "default": "0",
-   "fieldname": "backyard_access",
-   "fieldtype": "Check",
-   "label": "Backyard Access"
-  },
-  {
-   "fieldname": "column_break_gdkd",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "swimming_pool",
-   "fieldtype": "Check",
-   "label": "Swimming Pool"
-  },
-  {
-   "default": "0",
-   "fieldname": "laundry",
-   "fieldtype": "Check",
-   "label": "Laundry"
-  },
-  {
-   "fieldname": "column_break_attz",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "ac_in_common_area",
-   "fieldtype": "Check",
-   "label": "AC in common area"
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "common_area_media_section",
-   "fieldtype": "Section Break",
-   "label": "COMMON AREA MEDIA"
-  },
-  {
-   "fieldname": "common_area_img_1",
-   "fieldtype": "Attach Image",
-   "label": "Common Area IMG 1"
-  },
-  {
-   "fieldname": "common_area_img_4",
-   "fieldtype": "Attach Image",
-   "label": "Common Area IMG 4"
-  },
-  {
-   "fieldname": "column_break_wnbi",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "common_area_img_2",
-   "fieldtype": "Attach Image",
-   "label": "Common Area IMG 2"
-  },
-  {
-   "fieldname": "common_area_img_5",
-   "fieldtype": "Attach Image",
-   "label": "Common Area IMG 5"
-  },
-  {
-   "fieldname": "column_break_jpdi",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "common_area_img_3",
-   "fieldtype": "Attach Image",
-   "label": "Common Area IMG 3"
-  },
-  {
-   "fieldname": "common_area_img_6",
-   "fieldtype": "Attach Image",
-   "label": "Common Area IMG 6"
-  },
-  {
-   "fieldname": "common_area_image_show_1",
-   "fieldtype": "Image",
-   "label": "Common Area IMG 1",
-   "options": "common_area_img_1"
-  },
-  {
-   "fieldname": "common_area_image_show_4",
-   "fieldtype": "Image",
-   "label": "Common Area IMG 4",
-   "options": "common_area_img_4"
-  },
-  {
-   "fieldname": "common_area_image_show_2",
-   "fieldtype": "Image",
-   "label": "Common Area IMG 2",
-   "options": "common_area_img_2"
-  },
-  {
-   "fieldname": "common_area_image_show_5",
-   "fieldtype": "Image",
-   "label": "Common Area IMG 5",
-   "options": "common_area_img_5"
-  },
-  {
-   "fieldname": "common_area_image_show_3",
-   "fieldtype": "Image",
-   "label": "Common Area IMG 3",
-   "options": "common_area_img_3"
-  },
-  {
-   "fieldname": "common_area_image_show_6",
-   "fieldtype": "Image",
-   "label": "Common Area IMG 6",
-   "options": "common_area_img_6"
-  },
-  {
    "fieldname": "room_section",
    "fieldtype": "Section Break",
-   "label": "ROOM"
+   "label": "ROOMS"
   },
   {
    "fieldname": "room_details",
    "fieldtype": "Table",
    "label": "Room Details",
-   "options": "Room"
+   "options": "Room Items"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Link",
+   "label": "Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "knowledgebase",
+   "fieldtype": "Table",
+   "label": "Knowledgebase",
+   "options": "Knowledgebase Items"
+  },
+  {
+   "fieldname": "property_code",
+   "fieldtype": "Data",
+   "label": "Property Code",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "common_area_images",
+   "fieldtype": "Table",
+   "label": "Common Area Images",
+   "options": "Image Items"
+  },
+  {
+   "fieldname": "property_media_section",
+   "fieldtype": "Section Break",
+   "label": "PROPERTY MEDIA"
+  },
+  {
+   "fieldname": "property_images",
+   "fieldtype": "Table",
+   "label": "Property Images",
+   "options": "Image Items"
+  },
+  {
+   "fieldname": "tradies_list_section",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "TRADIES LIST"
+  },
+  {
+   "fieldname": "tradies",
+   "fieldtype": "Table",
+   "label": "Tradies",
+   "options": "Tradies Items"
+  },
+  {
+   "fieldname": "common_features",
+   "fieldtype": "Table",
+   "label": "Common Features",
+   "options": "Common Feature Master Items"
+  },
+  {
+   "fieldname": "property_builtup_area",
+   "fieldtype": "Float",
+   "label": "Property Builtup area"
+  },
+  {
+   "fieldname": "property_carpet_area",
+   "fieldtype": "Float",
+   "label": "Property Carpet area"
+  },
+  {
+   "fieldname": "property_facing",
+   "fieldtype": "Select",
+   "label": "Property Facing",
+   "options": "North\nNorth-East\nEast\nSouth-East\nWest\nNorth-West\nSouth-West\nSouth"
+  },
+  {
+   "fieldname": "file_and_videos",
+   "fieldtype": "Table",
+   "label": "File and Videos",
+   "options": "File and Video Attachment Items"
+  },
+  {
+   "fieldname": "total_rooms",
+   "fieldtype": "Int",
+   "label": "Total Rooms"
+  },
+  {
+   "fieldname": "occupied_rooms",
+   "fieldtype": "Int",
+   "label": "Occupied Rooms"
   }
  ],
  "icon": "octicon octicon-home",
- "image_field": "photo",
  "is_tree": 1,
  "links": [],
- "modified": "2025-09-15 16:50:53.731086",
+ "modified": "2025-09-17 17:48:21.104072",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Property",
