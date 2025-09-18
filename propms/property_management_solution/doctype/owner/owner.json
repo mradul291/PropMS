@@ -11,6 +11,7 @@
   "email",
   "phone",
   "column_break_znjj",
+  "user_id",
   "identity_id",
   "address",
   "status",
@@ -120,12 +121,18 @@
    "fieldname": "column_break_zwgm",
    "fieldtype": "Column Break",
    "read_only": 1
+  },
+  {
+   "fieldname": "user_id",
+   "fieldtype": "Link",
+   "label": "User ID",
+   "options": "User"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-17 17:20:31.773767",
+ "modified": "2025-09-18 13:20:52.461279",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Owner",

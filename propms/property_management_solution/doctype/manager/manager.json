@@ -10,10 +10,12 @@
   "last_name",
   "email",
   "phone",
+  "gender",
   "column_break_pxwj",
   "employee_id",
   "designation",
   "status",
+  "date_of_birth",
   "section_break_xbyn",
   "manages_properties"
  ],
@@ -50,14 +52,16 @@
   },
   {
    "fieldname": "employee_id",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Employee ID",
+   "options": "Employee",
    "read_only": 1
   },
   {
    "fieldname": "designation",
-   "fieldtype": "Data",
-   "label": "Designation"
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
   },
   {
    "fieldname": "status",
@@ -75,12 +79,25 @@
    "label": "Manages Properties",
    "options": "Property Items",
    "read_only": 1
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date Of Birth",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-17 17:10:19.419599",
+ "modified": "2025-09-18 13:54:19.787633",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Manager",

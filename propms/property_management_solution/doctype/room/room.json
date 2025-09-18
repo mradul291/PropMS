@@ -1,17 +1,18 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:room_code",
+ "autoname": "format:{property_code}-{room}",
  "creation": "2025-09-15 15:17:14.163117",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "room_details_section",
-  "room_code",
   "property_code",
   "room_status",
   "is_available",
+  "column_break_bzsy",
+  "room",
   "room_finance_section",
   "rent_amount",
   "security_deposit_amount",
@@ -40,14 +41,6 @@
    "label": "Property Code",
    "options": "Property",
    "reqd": 1
-  },
-  {
-   "fieldname": "room_code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Room Code",
-   "reqd": 1,
-   "unique": 1
   },
   {
    "fieldname": "room_details_section",
@@ -128,16 +121,26 @@
    "fieldname": "is_available",
    "fieldtype": "Check",
    "label": "Is Available"
+  },
+  {
+   "fieldname": "column_break_bzsy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Select",
+   "label": "Room",
+   "options": "R1\nR2\nR3\nR4\nR5\nR6\nR7\nR8\nR9\nR10\nR11\nR12\nR13\nR14\nR15\nR16\nR17\nR18\nR19\nR20\nR21\nR22\nR23\nR24\nR25\nR26\nR27\nR28\nR29\nR30"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-17 17:31:55.472706",
+ "modified": "2025-09-18 14:55:58.596742",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Room",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

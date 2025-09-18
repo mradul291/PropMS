@@ -18,6 +18,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "File Name",
+   "read_only_depends_on": "eval:doc.file_name == \"Signed Agreement\"",
    "reqd": 1,
    "unique": 1
   },
@@ -46,7 +47,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-17 11:20:59.814963",
+ "modified": "2025-09-18 18:39:53.660676",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "File and Video Attachment Items",

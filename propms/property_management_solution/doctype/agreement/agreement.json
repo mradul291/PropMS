@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
- "autoname": "field:agreement_id",
+ "autoname": "format:AGR-{start_date}-{lease_customer}-{room}-{#####}",
  "creation": "2018-05-01 22:11:38.457329",
  "doctype": "DocType",
  "document_type": "Document",
@@ -121,10 +121,12 @@
    "label": "Agreement Parties"
   },
   {
+   "fetch_from": "property.owners",
    "fieldname": "property_owner",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Property Owner",
+   "options": "Owner",
    "read_only": 1
   },
   {
@@ -194,6 +196,7 @@
   },
   {
    "description": "Security Deposit Amount",
+   "fetch_from": "room.security_deposit_amount",
    "fieldname": "security_deposit",
    "fieldtype": "Currency",
    "label": "Security deposit",
@@ -275,6 +278,7 @@
   {
    "fieldname": "lease_status",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Agreement Status",
    "options": "\nActive\nClosed\nNot Materialized\nRenewal to Previous Lease\nAdendum to Previous Lease\nVacating"
   },
@@ -282,7 +286,7 @@
    "fieldname": "room",
    "fieldtype": "Link",
    "label": "Room",
-   "link_filters": "[[\"Room\",\"property_code\",\"=\",\"eval:doc.property\"]]",
+   "link_filters": "[[\"Room\",\"property_code\",\"=\",\"eval:doc.property\"],[\"Room\",\"is_available\",\"=\",1]]",
    "options": "Room",
    "reqd": 1
   },
@@ -297,7 +301,7 @@
    "fieldname": "agreement_type",
    "fieldtype": "Select",
    "label": "Agreement Type",
-   "options": "Lease\nAgreement to Occupy\nRooming Agreement\nOther",
+   "options": "Agreement\nAgreement to Occupy\nRooming Agreement\nOther",
    "reqd": 1
   },
   {
@@ -320,6 +324,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "room.rent_amount",
    "fieldname": "fee_amount",
    "fieldtype": "Currency",
    "label": "Fee Amount",
@@ -346,7 +351,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Draft\nActive\nTerminated\nEnded\nCancelled"
+   "options": "Draft\nPending\nActive\nTerminated\nEnded\nCancelled"
   },
   {
    "fieldname": "last_billing_entry_date",
@@ -374,11 +379,11 @@
   }
  ],
  "links": [],
- "modified": "2025-09-17 18:46:39.315618",
+ "modified": "2025-09-18 17:01:18.527739",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Agreement",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

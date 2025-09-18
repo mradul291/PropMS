@@ -34,14 +34,14 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Role",
-   "options": "Primary\nSeconda"
+   "options": "Primary\nSecondary"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-17 15:22:56.593574",
+ "modified": "2025-09-18 15:50:20.593781",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Agreement Resident",

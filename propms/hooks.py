@@ -37,6 +37,13 @@ doctype_js = {
     "Issue": "property_management_solution/issue.js",
     "Company": "property_management_solution/company.js",
 }
+
+scheduler_events = {
+    "daily": [
+        "propms.property_management_solution.agreement.billing_scheduler"
+    ]
+}
+
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
