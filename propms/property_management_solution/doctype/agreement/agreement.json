@@ -58,6 +58,9 @@
   "column_break_34",
   "witness_2",
   "witness_1",
+  "terminate_details_section",
+  "terminate_reason",
+  "effective_date",
   "section_break_36",
   "amended_from"
  ],
@@ -103,7 +106,8 @@
    "default": "0",
    "fieldname": "signed_agreement_received",
    "fieldtype": "Check",
-   "label": "Signed agreement received"
+   "label": "Signed agreement received",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_1",
@@ -113,7 +117,8 @@
    "default": "0",
    "fieldname": "stamp_duty_paid_by_tenant",
    "fieldtype": "Check",
-   "label": "Stamp duty paid by Resident"
+   "label": "Stamp duty paid by Resident",
+   "read_only": 1
   },
   {
    "fieldname": "lease_parties_section",
@@ -376,10 +381,27 @@
    "fieldtype": "Table",
    "label": "Agreement Resident",
    "options": "Agreement Resident"
+  },
+  {
+   "fieldname": "terminate_details_section",
+   "fieldtype": "Section Break",
+   "label": "Terminate Details"
+  },
+  {
+   "description": "Enter the Reason before Termination",
+   "fieldname": "terminate_reason",
+   "fieldtype": "Small Text",
+   "label": "Terminate Reason"
+  },
+  {
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "label": "Effective Date",
+   "mandatory_depends_on": "eval:doc.terminate_reason"
   }
  ],
  "links": [],
- "modified": "2025-09-18 17:01:18.527739",
+ "modified": "2025-09-19 18:02:53.479819",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Agreement",

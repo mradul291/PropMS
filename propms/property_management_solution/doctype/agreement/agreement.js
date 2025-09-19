@@ -105,22 +105,49 @@ frappe.ui.form.on("Agreement", {
 				frappe.call({
 					method: "propms.property_management_solution.doctype.agreement.agreement.generate_next_billing_manual",
 					args: { agreement: frm.doc.name },
-					callback: function () {
-						frm.reload_doc();
+					callback: function (resp) {
+						if (resp.message) {
+							let { status, message } = resp.message;
+							if (status === "success") {
+								frappe.msgprint({
+									title: "Success",
+									indicator: "green",
+									message: message
+								});
+								frm.reload_doc();
+							} else {
+								frappe.msgprint({
+									title: "Error",
+									indicator: "red",
+									message: message
+								});
+							}
+						}
 					}
 				});
 			});
+
 		}
 	},
 	validate(frm) {
-		if (frm.is_new() && frm.doc.attachments && frm.doc.attachments.length) {
+		if (!frm.signed_agreement_received && frm.doc.attachments && frm.doc.attachments.length) {
 			// look for Signed Agreement row
-			let signed_row = frm.doc.attachments.find(row => row.attachment_type === "Signed Agreement");
+
+			let signed_row = frm.doc.attachments.find(row => row.file);
+			console.log("signed", signed_row)
 			if (signed_row) {
 				frm.set_value("signed_agreement_received", 1);
 			} else {
 				frm.set_value("signed_agreement_received", 0);
 			}
+		}
+
+		if (frm.is_new() && !frm.doc.next_period_start) {
+			frm.set_value("next_period_start", frm.doc.start_date)
+		}
+
+		if (frm.is_new() && !frm.doc.next_period_end) {
+			frm.set_value("next_period_end", frm.doc.end_date)
 		}
 	}
 });

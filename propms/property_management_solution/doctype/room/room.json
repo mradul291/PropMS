@@ -32,7 +32,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Room Status",
-   "options": "Available\nArchived\nDeleted"
+   "options": "Available\nOccupied\nArchived\nDeleted"
   },
   {
    "fieldname": "property_code",
@@ -136,7 +136,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-18 14:55:58.596742",
+ "modified": "2025-09-19 17:52:24.835903",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Room",

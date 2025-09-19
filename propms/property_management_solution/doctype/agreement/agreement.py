@@ -10,28 +10,7 @@ from frappe.utils import add_days, get_first_day, get_last_day, add_months, toda
 
 class Agreement(Document):  
     def on_submit(self):
-        try:
-            checklist_doc = frappe.get_doc("Checklist Checkup Area", "Handover")
-            if checklist_doc:
-                check_list = []
-                for task in checklist_doc.task:
-                    check = {}
-                    check["checklist_task"] = task.task_name
-                    check_list.append(check)
-
-                frappe.get_doc(
-                    dict(
-                        doctype="Daily Checklist",
-                        area="Handover",
-                        checkup_date=self.start_date,
-                        daily_checklist_detail=check_list,
-                        property=self.property,
-                    )
-                ).insert()
-        except Exception as e:
-            app_error_log(frappe.session.user, str(e))
-
-    # def validate(self):
+        
         try:
             if (
                 get_datetime(self.start_date)
@@ -52,10 +31,28 @@ class Agreement(Document):
         except Exception as e:
             app_error_log(frappe.session.user, str(e))
 
+    def on_update(self):
+        # Check if status changed to Active
+        if self.status == "Active" and self.has_value_changed("status"):
+            if self.room:
+                # Validate room availability before activating
+                is_available = frappe.db.get_value("Room", self.room, "is_available")
+                if not is_available:
+                    frappe.throw(f"Room {self.room} is unavailable. Cannot activate this agreement for this Room.")
+
+                # Mark room as unavailable
+                frappe.db.set_value("Room", self.room, "is_available", 0)
+
+        # If status changed to Terminated / Ended / Cancelled → free the room
+        elif self.status in ["Terminated", "Ended", "Cancelled"] and self.has_value_changed("status"):
+            if self.room:
+                frappe.db.set_value("Room", self.room, "is_available", 1)
+
     def validate(self):
         # keep resident count in sync
         
         # Validate attachments if status = Activate
+        print("self", self.signed_agreement_received)
         if self.status == "Activate" and not self.attachments and self.signed_agreement_received:
             frappe.throw("To activate the Agreement, please attach at least one Signed Agreement in Attachments.")
 
@@ -63,26 +60,27 @@ class Agreement(Document):
 
     def generate_next_billing(self):
         """Generate billing entry if due"""
+
         if self.status != "Active":
-            return
+            return "Agreement is not Active. Billing skipped."
 
         if not self.next_period_start:
             # Initialize on first run
             self.next_period_start = self.start_date
 
-        # Only proceed if today >= (next_period_start - days_to_invoice_in_advance)
-        if frappe.utils.getdate(today()) < frappe.utils.add_days(self.next_period_start, -1 * (self.days_to_invoice_in_advance or 0)):
-            return
+        # Check if it's time to generate billing
+        if getdate(today()) < add_days(self.next_period_start, -1 * (self.days_to_invoice_in_advance or 0)):
+            return "Billing already generated for the current cycle."
 
-        # Compute period end & length
+        # Compute period
         period_start = self.next_period_start
         period_end, period_length = self.compute_period(period_start)
 
-        # Proration: Daily Rate = Fee Amount / Period Length
+        # Calculate amount
         daily_rate = self.fee_amount / period_length
-        amount = daily_rate * period_length  # full period (can adjust for proration if mid-term)
+        amount = daily_rate * period_length
 
-        # Create Billing Entry
+        # Create billing entry
         billing_entry = frappe.get_doc({
             "doctype": "Agreement Billing Entry",
             "agreement": self.name,
@@ -91,15 +89,17 @@ class Agreement(Document):
             "amount": amount,
             "status": "Pending",
             "posting_date": today(),
-            "due_date": add_days(today(), 7)  # can tweak due days logic
+            "due_date": add_days(today(), 7)
         })
         billing_entry.insert(ignore_permissions=True)
 
-        # Update Agreement tracking fields
+        # Update Agreement
         self.last_billing_entry_date = today()
         self.next_period_start = add_days(period_end, 1)
         self.next_period_end = self.compute_period(self.next_period_start)[0]
         self.save(ignore_permissions=True)
+
+        return f"Billing Entry created for period {period_start} to {period_end}."
 
     def compute_period(self, start_date):
         """Return (end_date, length_in_days) based on frequency"""
@@ -110,7 +110,6 @@ class Agreement(Document):
             end_date = add_days(start_date, 13)
             return end_date, 14
         elif self.frequency == "Month":
-            # Month aligned to start_date day
             end_date = add_days(add_months(start_date, 1), -1)
             length = (end_date - start_date).days + 1
             return end_date, length
@@ -119,10 +118,20 @@ class Agreement(Document):
 
 @frappe.whitelist()
 def generate_next_billing_manual(agreement):
-    doc = frappe.get_doc("Agreement", agreement)
-    doc.generate_next_billing()
-    return "Billing generated"
+    try:
+        doc = frappe.get_doc("Agreement", agreement)
+        result = doc.generate_next_billing()
+        return {"status": "success", "message": result or "Billing generated successfully."}
+    except Exception as e:
+        frappe.log_error(title="Billing Generation Failed", message=frappe.get_traceback())
+        return {"status": "error", "message": f"Billing generation failed: {str(e)}"}
 
+def app_error_log(user, error_message):
+    frappe.log_error(
+        title=f"Error by {user}",
+        message=error_message
+    )
+    
 # @frappe.whitelist()
 # def getAllAgreement():
 #     # Below is temporarily created to manually run through all agreement and refresh agreement invoice schedule. Hardcoded to start from 1st Jan 2020.

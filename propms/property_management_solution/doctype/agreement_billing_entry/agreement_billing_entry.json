@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:AG-BILL-{DDMM}{###}",
+ "autoname": "format:AG-BILL-{DD}{MM}{###}",
  "creation": "2025-09-18 18:14:30.633301",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -71,7 +71,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-18 18:55:49.311682",
+ "modified": "2025-09-19 18:39:23.225472",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Agreement Billing Entry",
