@@ -22,7 +22,7 @@ frappe.ui.form.on("Room", {
         } else {
             // if unchecked, force status away from "Available"
             if (frm.doc.room_status === "Available") {
-                frm.set_value("room_status", "Archived");  // 👈 default fallback
+                frm.set_value("room_status", "Occupied");  // 👈 default fallback
             }
         }
     }

@@ -400,8 +400,9 @@
    "mandatory_depends_on": "eval:doc.terminate_reason"
   }
  ],
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-09-19 18:02:53.479819",
+ "modified": "2025-09-22 19:00:42.402987",
  "modified_by": "Administrator",
  "module": "Property Management Solution",
  "name": "Agreement",
